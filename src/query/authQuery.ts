@@ -7,4 +7,5 @@ export const login = async (username: string, password: string) => {
         username, password
     }).then(res => res.data);
     return jwt_key;
+    //TODO: return an error or try to solve an error if login fail
 };

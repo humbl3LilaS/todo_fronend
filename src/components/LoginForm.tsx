@@ -1,13 +1,12 @@
 import * as z from "zod";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Simulate} from "react-dom/test-utils";
-import submit = Simulate.submit;
 import {login} from "@/query/authQuery.ts";
 import {useLocalStorage} from "@/hook/useLocalStorage.ts";
 import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";
+import {useNavigate} from "react-router-dom";
 
 const LoginFormSchema = z.object({
     username: z.string({required_error: "Username is required"}).min(3, {message: "Username must be at least 3 characters long"}).max(20, "Username must be at most 20 characters long"),
@@ -23,12 +22,15 @@ export function LoginForm() {
     });
 
     const {setValue} = useLocalStorage("JWT_KEY");
+    const navigate = useNavigate();
 
     const onSubmit = (data: LoginFormSchemaType) => {
 
         console.log(data);
         const jwt_key = login(data.username, data.password);
         jwt_key.then(data => setValue(data.accessToken));
+        //TODO: Handle login fail case
+        return navigate("/");
     };
 
     return (
