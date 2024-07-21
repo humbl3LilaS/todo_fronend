@@ -2,7 +2,7 @@ import * as z from "zod";
 import {useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {login} from "@/query/authQuery.ts";
+import {login} from "@/query/authApi.ts";
 import {useLocalStorage} from "@/hook/useLocalStorage.ts";
 import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";

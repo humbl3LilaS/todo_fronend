@@ -2,6 +2,14 @@ import Login from "@/components/Login.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "@/components/Home/Home.tsx";
 
+import {QueryClient, QueryClientProvider} from "react-query";
+
+import React from "react";
+
+
+
+const queryClient = new QueryClient();
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -19,7 +27,9 @@ function App() {
 
 
     return (
-        <RouterProvider router={router}/>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/>
+        </QueryClientProvider>
     );
 }
 

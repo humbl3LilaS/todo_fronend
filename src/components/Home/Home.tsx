@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {compareIssuedTime} from "@/lib/utils.ts";
 import {useTokenStore} from "@/store/tokenStore.ts";
+import {useGetAllTodo} from "@/query/query.ts";
 
 export default function Home() {
     const {getValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
@@ -18,7 +19,13 @@ export default function Home() {
             compareIssuedTime(JWT_KEY.issuedTime) ? setToken(JWT_KEY.accessToken) : navigate("/login");
         }
     }, [JWT_KEY, navigate, setToken]);
+
+    const {data} = useGetAllTodo();
+
     return (
-        <h1>Home</h1>
+        <section>
+            <h1>Home</h1>
+            {data && data.map(item => <h2 key={item._id}>{item.content}</h2>)}
+        </section>
     );
 }
