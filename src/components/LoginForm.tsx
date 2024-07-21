@@ -8,6 +8,8 @@ import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {useNavigate} from "react-router-dom";
 import {TTokenInStorage} from "@/types/authType.ts";
+import {useToast} from "@/components/ui/use-toast.ts";
+import {AxiosError} from "axios";
 
 const LoginFormSchema = z.object({
     username: z.string({required_error: "Username is required"}).min(3, {message: "Username must be at least 3 characters long"}).max(20, "Username must be at most 20 characters long"),
@@ -17,7 +19,7 @@ const LoginFormSchema = z.object({
 type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
 
 export function LoginForm() {
-    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<LoginFormSchemaType>({
+    const {register, handleSubmit, formState: {errors, isSubmitting}, resetField} = useForm<LoginFormSchemaType>({
         resolver: zodResolver(LoginFormSchema),
         mode: "onTouched"
     });
@@ -25,13 +27,32 @@ export function LoginForm() {
     const {setValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
     const navigate = useNavigate();
 
+    const {toast} = useToast();
+
     const onSubmit = async (data: LoginFormSchemaType) => {
 
-        console.log(data);
-        const jwt_key = await login(data.username, data.password);
-        setValue({accessToken: jwt_key.accessToken, issuedTime: Date.now()});
-        //TODO: Handle login fail case
-        return navigate("/");
+        try {
+            const jwt_key = await login(data.username, data.password);
+            setValue({accessToken: jwt_key.accessToken, issuedTime: Date.now()});
+            toast({
+                description: "Login Success",
+                duration: 2000
+            });
+            return navigate("/");
+        } catch (e) {
+            if (e instanceof AxiosError) {
+
+                toast({
+                    description: e.response?.data.error,
+                    duration: 2000
+                });
+                //@ts-ignore
+                resetField("username");
+                //@ts-ignore
+                resetField("password");
+            }
+        }
+
     };
 
     return (
@@ -51,6 +72,7 @@ export function LoginForm() {
                     {isSubmitting ? "Submitting" : "Submit"}
                 </Button>
             </form>
+
         </Card>
     );
 }

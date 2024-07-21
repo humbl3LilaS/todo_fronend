@@ -9,6 +9,7 @@ export const getAllTodo = async () => {
     };
     console.log(authHeader);
     // @ts-expect-error i will fix the headers later
+    // @ts-ignore
     const todos = await axios.request<TTodo[], AxiosResponse<TTodo[]>>({
         baseURL: "http://localhost:3000/api/v1/todos",
         method: "GET",

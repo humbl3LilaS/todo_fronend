@@ -5,7 +5,7 @@ import Home from "@/components/Home/Home.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 
 import React from "react";
-
+import {Toaster} from "@/components/ui/toaster.tsx";
 
 
 const queryClient = new QueryClient();
