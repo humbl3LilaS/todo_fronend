@@ -15,7 +15,7 @@ export default function Home() {
             navigate("/login");
         }
         if (JWT_KEY) {
-            compareIssuedTime(JWT_KEY.issuedTime) ?   setToken(JWT_KEY.accessToken) : navigate("/login");
+            compareIssuedTime(JWT_KEY.issuedTime) ? setToken(JWT_KEY.accessToken) : navigate("/login");
         }
     }, [JWT_KEY, navigate, setToken]);
     return (

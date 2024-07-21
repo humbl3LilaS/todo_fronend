@@ -17,7 +17,7 @@ const LoginFormSchema = z.object({
 type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
 
 export function LoginForm() {
-    const {register, handleSubmit, formState: {errors}} = useForm<LoginFormSchemaType>({
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<LoginFormSchemaType>({
         resolver: zodResolver(LoginFormSchema),
         mode: "onTouched"
     });
@@ -25,11 +25,11 @@ export function LoginForm() {
     const {setValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
     const navigate = useNavigate();
 
-    const onSubmit = (data: LoginFormSchemaType) => {
+    const onSubmit = async (data: LoginFormSchemaType) => {
 
         console.log(data);
-        const jwt_key = login(data.username, data.password);
-        jwt_key.then(data => setValue({accessToken: data.accessToken, issuedTime: Date.now()}));
+        const jwt_key = await login(data.username, data.password);
+        setValue({accessToken: jwt_key.accessToken, issuedTime: Date.now()});
         //TODO: Handle login fail case
         return navigate("/");
     };
@@ -47,7 +47,9 @@ export function LoginForm() {
                     <Input type="password" {...register("password")} id={"password"}/>
                     {errors.password && <h1>{errors.password.message}</h1>}
                 </div>
-                <Button type={"submit"} className={"mt-4 font-bold"}>Submit</Button>
+                <Button type={"submit"} className={"mt-4 font-bold"} disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting" : "Submit"}
+                </Button>
             </form>
         </Card>
     );
