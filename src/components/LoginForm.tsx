@@ -7,6 +7,7 @@ import {useLocalStorage} from "@/hook/useLocalStorage.ts";
 import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {useNavigate} from "react-router-dom";
+import {TTokenInStorage} from "@/types/authType.ts";
 
 const LoginFormSchema = z.object({
     username: z.string({required_error: "Username is required"}).min(3, {message: "Username must be at least 3 characters long"}).max(20, "Username must be at most 20 characters long"),
@@ -21,14 +22,14 @@ export function LoginForm() {
         mode: "onTouched"
     });
 
-    const {setValue} = useLocalStorage("JWT_KEY");
+    const {setValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
     const navigate = useNavigate();
 
     const onSubmit = (data: LoginFormSchemaType) => {
 
         console.log(data);
         const jwt_key = login(data.username, data.password);
-        jwt_key.then(data => setValue(data.accessToken));
+        jwt_key.then(data => setValue({accessToken: data.accessToken, issuedTime: Date.now()}));
         //TODO: Handle login fail case
         return navigate("/");
     };
