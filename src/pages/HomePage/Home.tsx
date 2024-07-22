@@ -13,10 +13,10 @@ export default function Home() {
     const {setToken} = useTokenStore();
     useEffect(() => {
         if (!JWT_KEY) {
-            navigate("/login");
+            navigate("/auth/login");
         }
         if (JWT_KEY) {
-            compareIssuedTime(JWT_KEY.issuedTime) ? setToken(JWT_KEY.accessToken) : navigate("/login");
+            compareIssuedTime(JWT_KEY.issuedTime) ? setToken(JWT_KEY.accessToken) : navigate("/auth/login");
         }
     }, [JWT_KEY, navigate, setToken]);
 

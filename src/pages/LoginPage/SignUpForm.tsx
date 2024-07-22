@@ -1,49 +1,52 @@
-import * as z from "zod";
-import {useForm} from "react-hook-form";
-import {Button} from "@/components/ui/button.tsx";
+import {z} from "zod";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {login} from "@/query/authApi.ts";
-import {useLocalStorage} from "@/hook/useLocalStorage.ts";
-import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import {Link, useNavigate} from "react-router-dom";
-import {TTokenInStorage} from "@/types/authType.ts";
-import {useToast} from "@/components/ui/use-toast.ts";
+import {Button} from "@/components/ui/button.tsx";
+import {Card} from "@/components/ui/card.tsx";
+import {auth} from "@/query/authApi.ts";
 import {AxiosError} from "axios";
+import {useLocalStorage} from "@/hook/useLocalStorage.ts";
+import {TTokenInStorage} from "@/types/authType.ts";
+import {useNavigate} from "react-router-dom";
+import {useToast} from "@/components/ui/use-toast.ts";
 
-const LoginFormSchema = z.object({
+const SignUpSchema = z.object({
     username: z.string({required_error: "Username is required"}).min(3, {message: "Username must be at least 3 characters long"}).max(20, "Username must be at most 20 characters long"),
+    email: z.string({required_error: "Email is required"}).email(),
     password: z.string().min(8, {message: "Password must be at least 8 characters long"}).regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {message: "Password must include at least one Capital letter and one special character"}),
 });
 
-type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
+type SingUpSchemaType = z.infer<typeof SignUpSchema>;
 
-export function LoginForm() {
-    const {register, handleSubmit, formState: {errors, isSubmitting}, resetField} = useForm<LoginFormSchemaType>({
-        resolver: zodResolver(LoginFormSchema),
-        mode: "onTouched"
-    });
+export default function SignUpForm() {
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isSubmitting},
+        resetField
+    } = useForm<SingUpSchemaType>({resolver: zodResolver(SignUpSchema)});
 
     const {setValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
     const navigate = useNavigate();
 
     const {toast} = useToast();
 
-    const onSubmit = async (data: LoginFormSchemaType) => {
 
+    const onSubmit: SubmitHandler<SingUpSchemaType> = async (data) => {
         try {
-            const jwt_key = await login(data.username, data.password);
+            const jwt_key = await auth("/auth/signup", data);
             setValue({accessToken: jwt_key.accessToken, issuedTime: Date.now()});
             toast({
-                description: "Login Success",
+                description: "Signup Success",
                 duration: 2000
             });
             return navigate("/");
         } catch (e) {
             if (e instanceof AxiosError) {
-
                 toast({
-                    title: "Login Fail:",
+                    title: "Signup Fail:",
                     description: e.response?.data.error,
                     duration: 2000
                 });
@@ -51,19 +54,27 @@ export function LoginForm() {
                 resetField("username");
                 //@ts-ignore
                 resetField("password");
+                //@ts-ignore
+                resetField("email");
             }
         }
-
     };
 
     return (
-        <Card className={"w-1/3 p-10 bg-gray-200 text-stone-800"}>
+        <Card className={"w-2/3 max-w-[600px] p-10 bg-gray-200 text-stone-800"}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={"flex flex-col gap-y-3 mb-3"}>
                     <label htmlFor="username" className={"font-bold"}>Username:</label>
                     <Input type="text" id={"username"} {...register("username")}/>
                     {errors.username && <h1>{errors.username.message}</h1>}
                 </div>
+
+                <div className={"flex flex-col gap-y-3 mb-3"}>
+                    <label htmlFor="username" className={"font-bold"}>Email:</label>
+                    <Input type="text" id={"email"} {...register("email")}/>
+                    {errors.email && <h1>{errors.email.message}</h1>}
+                </div>
+
                 <div className={"flex flex-col gap-y-3"}>
                     <label htmlFor="password" className={"font-bold"}>Password:</label>
                     <Input type="password" {...register("password")} id={"password"}/>
@@ -71,25 +82,10 @@ export function LoginForm() {
                 </div>
 
                 <Button type={"submit"} className={"mt-4 font-bold"} disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting" : "Login"}
+                    {isSubmitting ? "Submitting" : "Sing Up"}
                 </Button>
 
-                <div className={"mt-4"}>
-                    <p className={"pb-1"}>
-                        Forget <Link to={"/auth"} className={"text-violet-400 border-b-violet-500 border-b-2"}>
-                        Password
-                    </Link> ?
-                    </p>
-                    <p className={"pb-1"}>
-                        Don't have an account? <Link to={"/auth/signup"}
-                                                     className={"text-violet-400 border-b-violet-500 border-b-2"}>
-                        Sign up
-                    </Link>
-                    </p>
-                </div>
-
             </form>
-
         </Card>
     );
 }
