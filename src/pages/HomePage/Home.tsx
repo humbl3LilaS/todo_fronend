@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {compareIssuedTime} from "@/lib/utils.ts";
 import {useTokenStore} from "@/store/tokenStore.ts";
 import {useGetAllTodo} from "@/query/query.ts";
+import Section from "@/components/Util/Section.tsx";
 
 export default function Home() {
     const {getValue} = useLocalStorage<TTokenInStorage>("JWT_KEY");
@@ -23,9 +24,9 @@ export default function Home() {
     const {data} = useGetAllTodo();
 
     return (
-        <section>
+        <Section className={"w-full h-full bg-emerald-400"}>
             <h1>Home</h1>
             {data && data.map(item => <h2 key={item._id}>{item.content}</h2>)}
-        </section>
+        </Section>
     );
 }

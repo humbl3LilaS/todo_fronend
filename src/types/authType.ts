@@ -14,6 +14,6 @@ export interface TLogin {
     password: string;
 }
 
-export interface TSignUpForm extends TLogin {
+export interface TSignUp extends TLogin {
     username: string;
 }

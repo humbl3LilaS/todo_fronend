@@ -1,4 +1,4 @@
-import {LoginForm} from "@/components/LoginForm.tsx";
+import {LoginForm} from "@/pages/AuthPage/LoginForm.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
 export default function Login() {

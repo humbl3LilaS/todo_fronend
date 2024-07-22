@@ -1,4 +1,4 @@
-import Login from "@/components/Login.tsx";
+import Login from "@/pages/AuthPage/Login.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "@/pages/HomePage/Home.tsx";
 
@@ -6,8 +6,9 @@ import {QueryClient, QueryClientProvider} from "react-query";
 
 import React from "react";
 
-import SignUp from "@/pages/LoginPage/SignUp.tsx";
+import SignUp from "@/pages/AuthPage/SignUp.tsx";
 import {ReactQueryDevtools} from "react-query/devtools";
+import Layout from "@/components/Layout.tsx";
 
 
 const queryClient = new QueryClient();
@@ -15,7 +16,13 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home/>,
+        element: <Layout/>,
+        children: [
+            {
+                index: true,
+                element: <Home/>
+            }
+        ]
     },
     {
         path: "/auth",

@@ -1,4 +1,4 @@
-import SignUpForm from "@/pages/LoginPage/SignUpForm.tsx";
+import SignUpForm from "@/pages/AuthPage/SignUpForm.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
 export default function SignUp() {
