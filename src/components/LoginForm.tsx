@@ -2,7 +2,7 @@ import * as z from "zod";
 import {useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {login} from "@/query/authApi.ts";
+import {auth} from "@/query/authApi.ts";
 import {useLocalStorage} from "@/hook/useLocalStorage.ts";
 import {Card} from "@/components/ui/card.tsx";
 import {Input} from "@/components/ui/input.tsx";
@@ -12,7 +12,7 @@ import {useToast} from "@/components/ui/use-toast.ts";
 import {AxiosError} from "axios";
 
 const LoginFormSchema = z.object({
-    username: z.string({required_error: "Username is required"}).min(3, {message: "Username must be at least 3 characters long"}).max(20, "Username must be at most 20 characters long"),
+    email: z.string({required_error: "Email is required"}).email(),
     password: z.string().min(8, {message: "Password must be at least 8 characters long"}).regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {message: "Password must include at least one Capital letter and one special character"}),
 });
 
@@ -32,7 +32,7 @@ export function LoginForm() {
     const onSubmit = async (data: LoginFormSchemaType) => {
 
         try {
-            const jwt_key = await login(data.username, data.password);
+            const jwt_key = await auth("/auth/login", data);
             setValue({accessToken: jwt_key.accessToken, issuedTime: Date.now()});
             toast({
                 description: "Login Success",
@@ -48,7 +48,7 @@ export function LoginForm() {
                     duration: 2000
                 });
                 //@ts-ignore
-                resetField("username");
+                resetField("email");
                 //@ts-ignore
                 resetField("password");
             }
@@ -60,9 +60,9 @@ export function LoginForm() {
         <Card className={"w-1/3 p-10 bg-gray-200 text-stone-800"}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={"flex flex-col gap-y-3 mb-3"}>
-                    <label htmlFor="username" className={"font-bold"}>Username:</label>
-                    <Input type="text" id={"username"} {...register("username")}/>
-                    {errors.username && <h1>{errors.username.message}</h1>}
+                    <label htmlFor="username" className={"font-bold"}>Email:</label>
+                    <Input type="text" id={"username"} {...register("email")}/>
+                    {errors.email && <h1>{errors.email.message}</h1>}
                 </div>
                 <div className={"flex flex-col gap-y-3"}>
                     <label htmlFor="password" className={"font-bold"}>Password:</label>

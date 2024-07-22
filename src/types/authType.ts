@@ -10,10 +10,10 @@ export type TTokenInStorage = {
 }
 
 export interface TLogin {
-    username: string;
+    email: string;
     password: string;
 }
 
 export interface TSignUpForm extends TLogin {
-    email: string;
+    username: string;
 }

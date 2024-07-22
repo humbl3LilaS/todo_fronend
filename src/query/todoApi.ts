@@ -7,8 +7,7 @@ export const getAllTodo = async () => {
     const authHeader = {
         "Authentication": `Bearer ${jwt_token}`
     };
-    console.log(authHeader);
-    // @ts-expect-error i will fix the headers later
+
     // @ts-ignore
     const todos = await axios.request<TTodo[], AxiosResponse<TTodo[]>>({
         baseURL: "http://localhost:3000/api/v1/todos",
