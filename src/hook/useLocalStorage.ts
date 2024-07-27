@@ -12,6 +12,9 @@ export const useLocalStorage = <T>(key: string) => {
         }
 
     };
+    const item = localStorage.getItem(key);
+    const value: T | undefined = JSON.parse(item) ?? undefined;
 
-    return {setValue, getValue};
+
+    return {setValue, getValue, value};
 };

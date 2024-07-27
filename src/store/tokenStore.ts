@@ -2,7 +2,7 @@ import {create} from "zustand";
 import {immer} from "zustand/middleware/immer";
 
 type State = {
-    token: string;
+    token: string | undefined;
 }
 
 type Action = {
@@ -14,7 +14,7 @@ type TTokenStore = State & Action;
 
 export const useTokenStore = create<TTokenStore>()(
     immer((set) => ({
-        token: null,
+        token: undefined,
         setToken: (value) => set((state) => {
             state.token = value;
         })

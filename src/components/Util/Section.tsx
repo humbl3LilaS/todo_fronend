@@ -7,7 +7,7 @@ type TSection = {
 }
 export default function Section({className, children}: TSection) {
     return (
-        <section className={cn("w-full h-full p-6", className)}>
+        <section className={cn("w-full h-full p-10", className)}>
             {children}
         </section>
     );
