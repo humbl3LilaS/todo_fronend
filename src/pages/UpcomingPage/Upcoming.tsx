@@ -1,9 +1,20 @@
 import Section from "@/components/Util/Section.tsx";
+import NavItem from "@/components/nav/NavItem.tsx";
+
+import {Link} from "react-router-dom";
+import SectionNav from "@/components/nav/SectionNav.tsx";
+import calendar from "/icon/calendar.svg";
 
 export default function Upcoming() {
     return (
         <Section>
-            <h1>Upcoming</h1>
+            <SectionNav>
+                <NavItem path={calendar}>
+                    <Link to={"/important"} className={"text-xl font-bold"}>
+                        Upcoming
+                    </Link>
+                </NavItem>
+            </SectionNav>
         </Section>
     );
 }

@@ -1,19 +1,19 @@
 import Section from "@/components/Util/Section.tsx";
 import NavItem from "@/components/nav/NavItem.tsx";
-import check from "/icon/check.svg";
+import home from "/icon/home.svg";
 import {Link} from "react-router-dom";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 
-export default function Complete() {
+export default function Task(){
     return (
         <Section>
             <SectionNav>
-                <NavItem path={check}>
+                <NavItem path={home}>
                     <Link to={"/important"} className={"text-xl font-bold"}>
-                        Completed
+                        Task
                     </Link>
                 </NavItem>
             </SectionNav>
         </Section>
-    );
+    )
 }

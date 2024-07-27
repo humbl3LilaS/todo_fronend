@@ -1,16 +1,16 @@
 import Section from "@/components/Util/Section.tsx";
-import NavItem from "@/components/nav/NavItem.tsx";
-import check from "/icon/check.svg";
-import {Link} from "react-router-dom";
 import SectionNav from "@/components/nav/SectionNav.tsx";
+import NavItem from "@/components/nav/NavItem.tsx";
+import star from "/icon/star.svg"
+import {Link} from "react-router-dom";
 
-export default function Complete() {
+export default function Important() {
     return (
         <Section>
             <SectionNav>
-                <NavItem path={check}>
+                <NavItem path={star}>
                     <Link to={"/important"} className={"text-xl font-bold"}>
-                        Completed
+                        Important
                     </Link>
                 </NavItem>
             </SectionNav>

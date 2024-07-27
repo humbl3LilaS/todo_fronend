@@ -9,10 +9,10 @@ import React from "react";
 import SignUp from "@/pages/AuthPage/SignUp.tsx";
 import {ReactQueryDevtools} from "react-query/devtools";
 import Layout from "@/components/Layout.tsx";
-import Today from "@/pages/TodayPage/Today.tsx";
+import Important from "@/pages/ImportantPage/Important.tsx";
 import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";
 import Complete from "@/pages/CompletedPage/Complete.tsx";
-import Trash from "@/pages/TrashPage/Trash.tsx";
+import Task from "@/pages/Task/Task.tsx";
 
 
 const queryClient = new QueryClient();
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
                 element: <Home/>
             },
             {
-                path: "today",
-                element: <Today/>
+                path: "important",
+                element: <Important/>
             },
             {
                 path: "upcoming",
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
                 element: <Complete/>
             },
             {
-                path: "trash",
-                element: <Trash/>
+                path: "task",
+                element: <Task/>
             }
         ]
     },
