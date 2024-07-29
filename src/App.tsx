@@ -4,7 +4,6 @@ import Home from "@/pages/HomePage/Home.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 import React from "react";
 import SignUp from "@/pages/AuthPage/SignUp.tsx";
-import {ReactQueryDevtools} from "react-query/devtools";
 import Layout from "@/components/layout/Layout.tsx";
 import Important from "@/pages/ImportantPage/Important.tsx";
 import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";

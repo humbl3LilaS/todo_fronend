@@ -1,4 +1,3 @@
-import ProfileAvatar from "@/components/util/ProfileAvatar.tsx";
 import ProfileDropdown from "@/components/util/ProfileDropdown.tsx";
 
 export default function ToolBar() {
