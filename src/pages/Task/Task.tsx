@@ -1,4 +1,4 @@
-import Section from "@/components/Util/Section.tsx";
+import Section from "@/components/layout/Section.tsx";
 import NavItem from "@/components/nav/NavItem.tsx";
 import home from "/icon/home.svg";
 import {Link} from "react-router-dom";

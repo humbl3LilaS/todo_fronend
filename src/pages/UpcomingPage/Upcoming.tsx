@@ -1,6 +1,5 @@
-import Section from "@/components/Util/Section.tsx";
+import Section from "@/components/layout/Section.tsx";
 import NavItem from "@/components/nav/NavItem.tsx";
-
 import {Link} from "react-router-dom";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 import calendar from "/icon/calendar.svg";

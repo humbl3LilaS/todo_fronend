@@ -5,6 +5,7 @@ import calendar from "/icon/calendar.svg";
 import star from "/icon/star.svg";
 import home from "/icon/home.svg";
 import {Link} from "react-router-dom";
+import ProfileAvatar from "@/components/util/ProfileAvatar.tsx";
 
 
 export default function SideNav() {
@@ -27,7 +28,6 @@ export default function SideNav() {
                     <NavItem path={home}>
                         <Link to={"/task"}>Task</Link>
                     </NavItem>
-
                 </ul>
             </div>
         </aside>

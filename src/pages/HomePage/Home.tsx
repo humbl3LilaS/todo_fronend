@@ -1,5 +1,5 @@
 import {useGetAllTodo} from "@/query/query.ts";
-import Section from "@/components/Util/Section.tsx";
+import Section from "@/components/layout/Section.tsx";
 import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 import NavItem from "@/components/nav/NavItem.tsx";

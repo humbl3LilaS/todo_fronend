@@ -1,4 +1,4 @@
-import Section from "@/components/Util/Section.tsx";
+import Section from "@/components/layout/Section.tsx";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 import NavItem from "@/components/nav/NavItem.tsx";
 import star from "/icon/star.svg"
