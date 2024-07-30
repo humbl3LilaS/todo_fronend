@@ -5,7 +5,7 @@ import calendar from "/icon/calendar.svg";
 import star from "/icon/star.svg";
 import home from "/icon/home.svg";
 import {Link} from "react-router-dom";
-import ProfileAvatar from "@/components/util/ProfileAvatar.tsx";
+import {Separator} from "@/components/ui/separator.tsx";
 
 
 export default function SideNav() {
@@ -29,6 +29,8 @@ export default function SideNav() {
                         <Link to={"/task"}>Task</Link>
                     </NavItem>
                 </ul>
+                <Separator className={"bg-stone-800"}/>
+                {/*Todo: Render List*/}
             </div>
         </aside>
     );
