@@ -9,7 +9,7 @@ import Important from "@/pages/ImportantPage/Important.tsx";
 import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";
 import Complete from "@/pages/CompletedPage/Complete.tsx";
 import Task from "@/pages/Task/Task.tsx";
-import {logoutLoader} from "@/loader/logoutLoader.ts";
+import {authRouteGuard, logoutLoader} from "@/loader/logoutLoader.ts";
 
 
 const queryClient = new QueryClient();
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
     {
         path: "/auth",
         children: [
-            {path: "login", element: <Login/>},
-            {path: "signup", element: <SignUp/>},
+            {path: "login", element: <Login/>, loader: authRouteGuard},
+            {path: "signup", element: <SignUp/>, loader: authRouteGuard},
             {path: "logout", loader: logoutLoader}
         ]
     }
