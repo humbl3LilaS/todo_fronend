@@ -1,6 +1,5 @@
 import {redirect} from "react-router-dom";
-import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
-import {useTokenStore} from "@/store/tokenStore.ts";
+
 
 
 export const logoutLoader = () => {
@@ -8,10 +7,8 @@ export const logoutLoader = () => {
     return redirect("/");
 };
 
-export const authRouteGuard = ({request, params}) => {
-    console.log(request);
+export const authRouteGuard = () => {
     const JWT_KEY = localStorage.getItem("JWT_KEY");
-    console.log(JWT_KEY);
     if (JWT_KEY) {
         return redirect("/");
     }
