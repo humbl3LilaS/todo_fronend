@@ -12,7 +12,7 @@ export default function SideNav() {
     return (
         <aside className={"w-1/5 py-10 px-6 border-r border-r-stone-400"}>
             <div>
-                <ul className={"*:mb-10 "}>
+                <ul className={"*:mb-6"}>
                     <NavItem path={sun}>
                         <Link to={"/"}>My day</Link>
                     </NavItem>
