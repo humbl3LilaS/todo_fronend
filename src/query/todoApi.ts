@@ -1,11 +1,12 @@
-import {useTokenStore} from "@/store/tokenStore.ts";
 import {TTodo} from "@/types/apiResponseType.ts";
 import axios, {AxiosResponse} from "axios";
+import {useLocalStorage} from "@/hook/useLocalStorage.ts";
+import {TTokenInStorage} from "@/types/authType.ts";
 
 export const getAllTodo = async () => {
-    const jwt_token = useTokenStore.getState().token as string;
+    const {value: JWT_TOKEN} = useLocalStorage<TTokenInStorage>("JWT_KEY")
     const authHeader = {
-        "Authentication": `Bearer ${jwt_token}`
+        "Authentication": `Bearer ${JWT_TOKEN?.accessToken}`
     };
 
     // @ts-ignore
