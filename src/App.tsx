@@ -2,7 +2,6 @@ import Login from "@/pages/AuthPage/Login.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "@/pages/HomePage/Home.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
-import React from "react";
 import SignUp from "@/pages/AuthPage/SignUp.tsx";
 import Layout from "@/components/layout/Layout.tsx";
 import Important from "@/pages/ImportantPage/Important.tsx";
@@ -10,6 +9,7 @@ import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";
 import Complete from "@/pages/CompletedPage/Complete.tsx";
 import Task from "@/pages/Task/Task.tsx";
 import {authRouteGuard, logoutLoader} from "@/loader/logoutLoader.ts";
+import ErrorPage from "@/pages/ErrorPage/404.tsx";
 
 
 const queryClient = new QueryClient();
@@ -18,6 +18,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 index: true,
