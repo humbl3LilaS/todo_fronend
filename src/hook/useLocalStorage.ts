@@ -13,7 +13,7 @@ export const useLocalStorage = <T>(key: string) => {
 
     };
     const item = localStorage.getItem(key);
-    const value: T | undefined = JSON.parse(item) ?? undefined;
+    const value: T | undefined = item ? JSON.parse(item) : undefined;
 
 
     return {setValue, getValue, value};

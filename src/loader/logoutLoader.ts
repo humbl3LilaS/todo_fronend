@@ -1,5 +1,6 @@
 import {redirect} from "react-router-dom";
-
+import {TTokenInStorage} from "@/types/authType.ts";
+import {compareIssuedTime} from "@/lib/utils.ts";
 
 
 export const logoutLoader = () => {
@@ -8,8 +9,9 @@ export const logoutLoader = () => {
 };
 
 export const authRouteGuard = () => {
-    const JWT_KEY = localStorage.getItem("JWT_KEY");
-    if (JWT_KEY) {
+    const keyInStorage = localStorage.getItem("JWT_KEY");
+    const JWT_KEY: TTokenInStorage | null = keyInStorage ? JSON.parse(keyInStorage) : null;
+    if (JWT_KEY?.accessToken && compareIssuedTime(JWT_KEY?.issuedTime)) {
         return redirect("/");
     }
     return null;
