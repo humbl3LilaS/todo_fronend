@@ -4,6 +4,7 @@ import SectionNav from "@/components/nav/SectionNav.tsx";
 import sun from "/icon/sun.svg";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
+import TodoInput from "@/components/form/TodoInput.tsx";
 
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
+            <TodoInput/>
             {data && data.map(item => <h2 key={item._id}>{item.content}</h2>)}
         </Section>
     );
