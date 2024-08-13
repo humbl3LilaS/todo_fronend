@@ -13,7 +13,12 @@ export default function TodoInput() {
 
     const {mutateAsync} = useAddTodo();
 
-    const {handleSubmit, register , resetField} = useForm<TInput>()
+    const {
+        handleSubmit,
+        register,
+        resetField,
+        formState: {errors, isValid}
+    } = useForm<TInput>()
 
     const [date, setDate] = useState<Date | undefined>();
 
@@ -30,12 +35,12 @@ export default function TodoInput() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input type="text" placeholder="Add a task"
                        className={"w-full py-3 px-4 focus:outline-none bg-stone-500"}
-                       {...register('content')}
+                       {...register('content', {required: true})}
                 />
                 <Separator className="mb-3 bg-stone-700"/>
                 <ul className={"flex justify-start items-center gap-x-6"}>
                     <DatePicker handler={setDate}/>
-                    <Button type={"submit"} className={"ml-auto"}>
+                    <Button type={"submit"} className={"ml-auto"} disabled={!isValid}>
                         Add
                     </Button>
                 </ul>
