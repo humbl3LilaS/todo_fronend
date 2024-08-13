@@ -1,6 +1,9 @@
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
+import DatePicker from "@/components/util/DatePicker.tsx";
+import {useState} from "react";
+import {useAddTodo} from "@/query/mutation.ts";
 
 type TInput = {
     content: string;
@@ -8,10 +11,18 @@ type TInput = {
 
 export default function TodoInput() {
 
-    const {handleSubmit, register} = useForm<TInput>()
+    const {mutateAsync} = useAddTodo();
 
-    const onSubmit: SubmitHandler<TInput> = (data) => {
-        console.log(data);
+    const {handleSubmit, register , resetField} = useForm<TInput>()
+
+    const [date, setDate] = useState<Date | undefined>();
+
+    const onSubmit: SubmitHandler<TInput> = async (data) => {
+        await mutateAsync({
+            content: data.content, dueAt: date?.valueOf()
+        });
+        setDate(undefined);
+        resetField("content")
     }
 
     return (
@@ -23,8 +34,7 @@ export default function TodoInput() {
                 />
                 <Separator className="mb-3 bg-stone-700"/>
                 <ul className={"flex justify-start items-center gap-x-6"}>
-                    <div>date</div>
-                    <div>priority</div>
+                    <DatePicker handler={setDate}/>
                     <Button type={"submit"} className={"ml-auto"}>
                         Add
                     </Button>

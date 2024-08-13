@@ -18,3 +18,16 @@ export const getAllTodo = async () => {
 
     return todos;
 };
+
+export const addTodo = async (payload: Partial<TTodo>) => {
+    const {value: JWT_TOKEN} = useLocalStorage<TTokenInStorage>("JWT_KEY");
+    const authHeader = {
+        "Authentication": `Bearer ${JWT_TOKEN?.accessToken}`
+    };
+    await axios.request<Partial<TTodo>[], AxiosResponse<Partial<TTodo>[]>>({
+        baseURL: "http://localhost:3000/api/v1/todos",
+        method: "POST",
+        headers: authHeader,
+        data: payload
+    });
+}
