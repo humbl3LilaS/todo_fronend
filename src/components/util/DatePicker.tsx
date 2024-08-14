@@ -1,11 +1,12 @@
 import {useState} from "react";
 import {Popover, PopoverTrigger} from "@/components/ui/popover.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {addDate, cn, formatDate, parseDate} from "@/lib/utils.ts";
+import {cn, parseDate} from "@/lib/utils.ts";
 import {CalendarIcon} from "lucide-react";
 import {PopoverContent} from "@radix-ui/react-popover";
 import {Calendar} from "@/components/ui/calendar.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
+import {addDays} from "date-fns";
 
 type TDatePicker = {
     handler: React.Dispatch<React.SetStateAction<Date | undefined>>
@@ -13,7 +14,7 @@ type TDatePicker = {
 
 export default function DatePicker({handler}: TDatePicker) {
 
-    const [date, setDate] = useState<Date | "Today" | "Tomorrow">();
+    const [date, setDate] = useState<Date>();
 
     return (
         <Popover>
@@ -33,7 +34,7 @@ export default function DatePicker({handler}: TDatePicker) {
             <PopoverContent>
                 <Select
                     onValueChange={(value) =>
-                        setDate(addDate(value))
+                        setDate(addDays(new Date(), parseInt(value)))
                     }
                 >
                     <SelectTrigger>
@@ -41,14 +42,14 @@ export default function DatePicker({handler}: TDatePicker) {
                     </SelectTrigger>
                     <SelectContent position="popper">
                         <SelectItem value="0">Today</SelectItem>
-                        <SelectItem value="1">Tomorrow</SelectItem>
+                        <SelectItem value="1.5">Tomorrow</SelectItem>
                         <SelectItem value="7">In a week</SelectItem>
                     </SelectContent>
                 </Select>
                 <div className={"bg-stone-200"}>
                     <Calendar
                         mode={"single"}
-                        selected={formatDate(date)}
+                        selected={date}
                         onSelect={(date) => {
                             setDate(date);
                             handler(date)

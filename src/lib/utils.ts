@@ -1,41 +1,21 @@
 import {type ClassValue, clsx} from "clsx";
 import {twMerge} from "tailwind-merge";
-import {addDays, format} from "date-fns";
+import {format, differenceInDays, differenceInMilliseconds} from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export function addDate(value: string) {
-    switch (value) {
-        case "0" :
+
+export function parseDate(value: Date) {
+    const diff = Math.abs(differenceInDays(new Date().valueOf() , value.valueOf() + 3600 * 4 * 1000));
+    switch (diff) {
+        case 0 :
             return "Today";
-        case "1" :
+        case 1 :
             return "Tomorrow";
         default:
-            return addDays(new Date(), parseInt(value));
-
-    }
-}
-
-export function parseDate(value: string | Date) {
-    if (typeof value === "string") {
-        return value;
-    } else {
-        return format(value, "PPP");
-    }
-}
-
-export function formatDate(value: "Today" | "Tomorrow" | Date | undefined) {
-    if (typeof value === "string") {
-        switch (value) {
-            case "Today":
-                return new Date();
-            case "Tomorrow":
-                return addDays(new Date(), 1);
-        }
-    } else {
-        return value;
+            return format(value, "PPP");
     }
 }
 
