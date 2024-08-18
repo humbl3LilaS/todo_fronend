@@ -1,21 +1,18 @@
-import {TTodo} from "@/types/apiResponseType.ts";
-import {Getter} from "@tanstack/react-table";
 import {cn} from "@/lib/utils.ts";
 
 type TDueDate = {
-    getValue: Getter<TTodo["dueAt"]>
+    due: number | undefined
 }
 
-export default function DueDate({getValue}: TDueDate) {
-    const dueTimeStamp = getValue();
-    if (!dueTimeStamp) {
+export default function DueDate({due}: TDueDate) {
+    if (!due) {
         return null;
     }
     const currentTimeStamp = Date.now();
-    const dueDate = new Date(dueTimeStamp).toDateString();
+    const dueDate = new Date(due).toDateString();
 
     return (
-        <p className={cn(dueTimeStamp < currentTimeStamp ? "text-red-500" : "text-stone-600")}>
+        <p className={cn(due < currentTimeStamp ? "text-red-500" : "text-stone-600")}>
             {dueDate}
         </p>
     )

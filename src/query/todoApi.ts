@@ -31,3 +31,23 @@ export const addTodo = async (payload: Partial<TTodo>) => {
         data: payload
     });
 }
+
+type TUpdateTodo = {
+    id: string;
+    payload: Partial<TTodo>;
+}
+
+export const updateTodo = async ({id, payload}: TUpdateTodo) => {
+    const {value: JWT_TOKEN} = useLocalStorage<TTokenInStorage>("JWT_KEY");
+    const authHeader = {
+        "Authentication": `Bearer ${JWT_TOKEN?.accessToken}`
+    };
+    await axios.request<Partial<TTodo>, AxiosResponse<Partial<TTodo>>>(
+        {
+            baseURL: `http://localhost:3000/api/v1/todos/${id}`,
+            method: "PUT",
+            headers: authHeader,
+            data: payload
+        }
+    )
+}

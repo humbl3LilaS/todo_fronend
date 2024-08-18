@@ -9,7 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 
 export function parseDate(value: Date) {
     const diff = Math.abs(differenceInDays(new Date().valueOf(), value.valueOf()));
-    console.log(diff)
     switch (diff) {
         case 0 :
             return "Today";
