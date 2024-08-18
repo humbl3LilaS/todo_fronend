@@ -4,7 +4,7 @@ import SortBtn from "@/components/button/SortBtn.tsx";
 export default function SortSelectBox() {
     return (
         <Select>
-            <SelectTrigger className={"w-fit p-0"}>
+            <SelectTrigger className={"w-fit py-2 px-4"}>
                 <SortBtn/>
             </SelectTrigger>
             <SelectContent className={"border-0 outline-0"}>

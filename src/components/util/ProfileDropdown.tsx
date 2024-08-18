@@ -13,7 +13,7 @@ export default function ProfileDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <ProfileAvatar/>
+                <ProfileAvatar />
             </DropdownMenuTrigger>
             <DropdownMenuContent className={"mr-4"} sideOffset={10}>
                 <div className={"p-4 flex justify-between items-center gap-x-6"}>
