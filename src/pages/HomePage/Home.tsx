@@ -5,6 +5,7 @@ import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
 import TodoInput from "@/components/form/TodoInput.tsx";
 import TodoListTable from "@/components/todo/TodoListTable.tsx";
+import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 
 
 export default function Home() {
@@ -14,7 +15,9 @@ export default function Home() {
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
-            <TodoInput/>
+            <DateInputProvider>
+                <TodoInput/>
+            </DateInputProvider>
             <TodoListTable/>
         </Section>
     );
