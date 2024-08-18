@@ -9,6 +9,9 @@ export type TTodo = {
     priority?: Priority;
 }
 
+export type TTableTodo = Exclude<TTodo, "author" | "createdAt" | "finishedAt" | "priority">
+
+
 type Priority = 1 | 2 | 3 | 4 | 5;
 
 type TAuthor = {

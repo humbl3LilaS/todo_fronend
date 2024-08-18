@@ -1,22 +1,21 @@
-import {useGetAllTodo} from "@/query/query.ts";
 import Section from "@/components/layout/Section.tsx";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 import sun from "/icon/sun.svg";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
 import TodoInput from "@/components/form/TodoInput.tsx";
+import TodoListTable from "@/components/todo/TodoListTable.tsx";
 
 
 export default function Home() {
     useCheckJwtKey();
-    const {data} = useGetAllTodo();
     return (
         <Section>
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
             <TodoInput/>
-            {data && data.map(item => <h2 key={item._id}>{item.content}</h2>)}
+            <TodoListTable/>
         </Section>
     );
 }
