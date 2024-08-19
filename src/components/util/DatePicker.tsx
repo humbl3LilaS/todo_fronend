@@ -32,9 +32,8 @@ export default function DatePicker() {
             <PopoverContent className={"z-10"}>
                 <Select
                     onValueChange={(value) => {
-                        setDate(addDays(new Date(), parseInt(value)));1
-                    }
-                    }
+                        setDate(addDays(new Date(), parseInt(value)));
+                    }}
                 >
                     <SelectTrigger>
                         <SelectValue placeholder="Select"/>
