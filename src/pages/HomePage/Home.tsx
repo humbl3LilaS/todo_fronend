@@ -4,12 +4,15 @@ import sun from "/icon/sun.svg";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {useCheckJwtKey} from "@/hook/useCheckJwtKey.ts";
 import TodoInput from "@/components/form/TodoInput.tsx";
-import TodoListTable from "@/components/todo/TodoListTable.tsx";
+import TodoTable from "@/components/todo/TodoTable.tsx";
 import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
+import {useListStyleStore} from "@/store/listStyleStore.ts";
+import TodoList from "@/components/todo/TodoList.tsx";
 
 
 export default function Home() {
     useCheckJwtKey();
+    const {style} = useListStyleStore();
     return (
         <Section>
             <SectionNav navHeader={"My Day"} iconPath={sun}>
@@ -18,7 +21,7 @@ export default function Home() {
             <DateInputProvider>
                 <TodoInput/>
             </DateInputProvider>
-            <TodoListTable/>
+            {style === "grid" ? <TodoTable/> : <TodoList/>}
         </Section>
     );
 }

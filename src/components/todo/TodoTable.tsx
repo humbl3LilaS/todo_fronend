@@ -4,7 +4,7 @@ import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {useTodoStore} from "@/store/todoStore.ts";
 
-export default function TodoListTable() {
+export default function TodoTable() {
     //@ts-ignore
     const {data} = useGetAllTodo();
     const columns = useTableColumns();
