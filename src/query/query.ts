@@ -10,7 +10,7 @@ export const useGetAllTodo = () => {
             queryFn: getAllTodo,
             staleTime: 3600 * 60 * 60,
             onSuccess: async (data) => {
-                setTodos(data);
+                await setTodos(data);
             }
         }
     )

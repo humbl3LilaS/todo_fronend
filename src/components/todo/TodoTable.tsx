@@ -5,10 +5,11 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import {useTodoStore} from "@/store/todoStore.ts";
 
 export default function TodoTable() {
-    //@ts-ignore
-    const {data} = useGetAllTodo();
+
     const columns = useTableColumns();
     const {unFinishedTodos} = useTodoStore();
+
+    // console.log(unFinishedTodos);
 
     const table = useReactTable({
         data: unFinishedTodos ?? [],

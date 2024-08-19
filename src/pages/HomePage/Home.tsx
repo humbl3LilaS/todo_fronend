@@ -8,10 +8,12 @@ import TodoTable from "@/components/todo/TodoTable.tsx";
 import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 import {useListStyleStore} from "@/store/listStyleStore.ts";
 import TodoList from "@/components/todo/TodoList.tsx";
+import {useGetAllTodo} from "@/query/query.ts";
 
 
 export default function Home() {
     useCheckJwtKey();
+    const {data} = useGetAllTodo();
     const {style} = useListStyleStore();
     return (
         <Section>
