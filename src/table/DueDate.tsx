@@ -14,8 +14,6 @@ export default function DueDate({due, className, prefixText = ""}: TDueDate) {
     const diff = differenceInDays(due, new Date().valueOf());
     const dueDate = new Date(due).toDateString();
 
-    console.log("diff", diff)
-
     return (
         <span className={cn(diff < 0 ? "text-red-500" : "text-stone-600", "font-semibold", className)}>
             {diff < 0 && prefixText} {dueDate}

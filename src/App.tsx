@@ -8,7 +8,7 @@ import Important from "@/pages/ImportantPage/Important.tsx";
 import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";
 import Complete from "@/pages/CompletedPage/Complete.tsx";
 import Task from "@/pages/Task/Task.tsx";
-import {authRouteGuard, logoutLoader} from "@/loader/logoutLoader.ts";
+import {authLoader, authRouteGuard, logoutLoader} from "@/loader/logoutLoader.ts";
 import ErrorPage from "@/pages/ErrorPage/404.tsx";
 
 
@@ -23,22 +23,27 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home/>,
+                loader: authLoader,
             },
             {
                 path: "important",
-                element: <Important/>
+                element: <Important/>,
+                loader: authLoader,
             },
             {
                 path: "upcoming",
-                element: <Upcoming/>
+                element: <Upcoming/>,
+                loader: authLoader,
             },
             {
                 path: "completed",
-                element: <Complete/>
+                element: <Complete/>,
+                loader: authLoader,
             },
             {
                 path: "task",
-                element: <Task/>
+                element: <Task/>,
+                loader: authLoader,
             }
         ]
     },
