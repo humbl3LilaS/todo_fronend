@@ -1,18 +1,15 @@
 import {useTableColumns} from "@/table/TodoTableColumns.tsx";
-import {useGetAllTodo} from "@/query/query.ts";
 import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
-import {useTodoStore} from "@/store/todoStore.ts";
+import {useFilteredTodo} from "@/hook/useFilteredTodo.ts";
 
 export default function TodoTable() {
 
     const columns = useTableColumns();
-    const {unFinishedTodos} = useTodoStore();
 
-    // console.log(unFinishedTodos);
-
+    const todos = useFilteredTodo({option: "unfinished"})
     const table = useReactTable({
-        data: unFinishedTodos ?? [],
+        data: todos ?? [],
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
