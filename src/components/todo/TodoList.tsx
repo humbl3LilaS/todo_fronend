@@ -1,12 +1,15 @@
 import TodoListItem from "@/components/todo/TodoListItem.tsx";
-import {useFilteredTodo} from "@/hook/useFilteredTodo.ts";
+import {TTodo} from "@/types/apiResponseType.ts";
 
-export default function TodoList() {
-    const unFinishedTodos = useFilteredTodo({option: "unfinished"});
+type TodoListProps = {
+    data: TTodo[] | undefined;
+}
+
+export default function TodoList({data}: TodoListProps) {
     return (
         <div className={"p-4 mt-4"}>
             <ul className={"flex flex-col gap-y-5"}>
-                {unFinishedTodos && unFinishedTodos.map(todo => <TodoListItem context={todo} key={todo._id}/>)}
+                {data && data.map(todo => <TodoListItem context={todo} key={todo._id}/>)}
             </ul>
         </div>
     )

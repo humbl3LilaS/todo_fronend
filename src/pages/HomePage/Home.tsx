@@ -8,13 +8,13 @@ import TodoTable from "@/components/todo/TodoTable.tsx";
 import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 import {useListStyleStore} from "@/store/listStyleStore.ts";
 import TodoList from "@/components/todo/TodoList.tsx";
-import {useGetAllTodo} from "@/query/query.ts";
+import {useFilteredTodo} from "@/hook/useFilteredTodo.ts";
 
 
 export default function Home() {
     useCheckJwtKey();
-    const {data} = useGetAllTodo();
     const {style} = useListStyleStore();
+    const todos = useFilteredTodo({option: "unfinished"})
     return (
         <Section>
             <SectionNav navHeader={"My Day"} iconPath={sun}>
@@ -23,7 +23,7 @@ export default function Home() {
             <DateInputProvider>
                 <TodoInput/>
             </DateInputProvider>
-            {style === "grid" ? <TodoTable/> : <TodoList/>}
+            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
         </Section>
     );
 }
