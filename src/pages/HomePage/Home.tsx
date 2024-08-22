@@ -7,12 +7,12 @@ import TodoTable from "@/components/todo/TodoTable.tsx";
 import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 import {useListStyleStore} from "@/store/listStyleStore.ts";
 import TodoList from "@/components/todo/TodoList.tsx";
-import {useFilteredTodo} from "@/hook/useFilteredTodo.ts";
+import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
 
 
 export default function Home() {
     const {style} = useListStyleStore();
-    const todos = useFilteredTodo({option: "unfinished"})
+    const todos = useProcessedTodo({filterOption: "unfinished"})
     return (
         <Section>
             <SectionNav navHeader={"My Day"} iconPath={sun}>
