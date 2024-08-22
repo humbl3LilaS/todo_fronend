@@ -1,6 +1,5 @@
 import {cn} from "@/lib/utils.ts";
 import {differenceInDays} from "date-fns";
-import {ReactNode} from "react";
 
 type TDueDate = {
     due: number | undefined,
@@ -12,12 +11,14 @@ export default function DueDate({due, className, prefixText = ""}: TDueDate) {
     if (!due) {
         return null;
     }
-    const diff = Math.abs(differenceInDays(new Date().valueOf(), due));
+    const diff = differenceInDays(due, new Date().valueOf());
     const dueDate = new Date(due).toDateString();
 
+    console.log("diff", diff)
+
     return (
-        <p className={cn(diff > 0 ? "text-red-500" : "text-stone-600", className)}>
-            {diff > 0 && prefixText} {dueDate}
-        </p>
+        <span className={cn(diff < 0 ? "text-red-500" : "text-stone-600", "font-semibold", className)}>
+            {diff < 0 && prefixText} {dueDate}
+        </span>
     )
 }
