@@ -2,7 +2,7 @@ import {useGetAllTodo} from "@/query/query.ts";
 import {differenceInDays} from "date-fns";
 import {TTodo} from "@/types/apiResponseType.ts";
 
-export type FilterOption = "unfinished" | "finished" | "upcoming" | "all"
+export type FilterOption = "unfinished" | "finished" | "upcoming" | "all" | "today"
 
 export const useFilteredTodo = ({option}: { option: FilterOption }): TTodo[] | undefined => {
     const {data: todos} = useGetAllTodo();
@@ -19,6 +19,11 @@ export const useFilteredTodo = ({option}: { option: FilterOption }): TTodo[] | u
                     return differenceInDays(todo.dueAt ?? 0, today) > 0
                 });
         }
+        case "today":
+            const today = new Date().valueOf();
+            return todos?.filter(todo => {
+                return differenceInDays(todo.dueAt ?? 0, today) === 0;
+            })
         case "all":
             return todos;
         default:

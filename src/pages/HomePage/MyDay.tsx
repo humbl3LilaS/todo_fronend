@@ -11,7 +11,7 @@ import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
 
 export default function MyDay() {
     const {style} = useListStyleStore();
-    const todos = useProcessedTodo({filterOption: "unfinished"})
+    const todos = useProcessedTodo({filterOption: "today"})
 
     return (
         <Section>
