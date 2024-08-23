@@ -6,12 +6,10 @@ import TodoTable from "@/components/todo/TodoTable.tsx";
 import {useListStyleStore} from "@/store/listStyleStore.ts";
 import TodoList from "@/components/todo/TodoList.tsx";
 import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
-import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
-import TodoInput from "@/components/form/TodoInput.tsx";
 
 
 
-export default function Home() {
+export default function MyDay() {
     const {style} = useListStyleStore();
     const todos = useProcessedTodo({filterOption: "unfinished"})
 
@@ -20,9 +18,6 @@ export default function Home() {
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
-            <DateInputProvider>
-                <TodoInput/>
-            </DateInputProvider>
             {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
         </Section>
     );

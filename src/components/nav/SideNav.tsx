@@ -13,8 +13,11 @@ export default function SideNav() {
         <aside className={"w-1/5 py-10 px-6 border-r border-r-stone-400"}>
             <div>
                 <ul className={"*:mb-6"}>
+                    <NavItem path={home}>
+                        <Link to={"/"}>Home</Link>
+                    </NavItem>
                     <NavItem path={sun}>
-                        <Link to={"/"}>My day</Link>
+                        <Link to={"/myday"}>My Day</Link>
                     </NavItem>
                     <NavItem path={star}>
                         <Link to={"/important"}>Important</Link>
@@ -24,9 +27,6 @@ export default function SideNav() {
                     </NavItem>
                     <NavItem path={check}>
                         <Link to={"/completed"}>Completed</Link>
-                    </NavItem>
-                    <NavItem path={home}>
-                        <Link to={"/task"}>Task</Link>
                     </NavItem>
                 </ul>
                 <Separator className={"bg-stone-800"}/>

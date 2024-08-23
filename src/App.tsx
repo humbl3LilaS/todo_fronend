@@ -1,13 +1,13 @@
 import Login from "@/pages/AuthPage/Login.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Home from "@/pages/HomePage/Home.tsx";
+import MyDay from "@/pages/HomePage/MyDay.tsx";
 import {QueryClient, QueryClientProvider} from "react-query";
 import SignUp from "@/pages/AuthPage/SignUp.tsx";
 import Layout from "@/components/layout/Layout.tsx";
 import Important from "@/pages/ImportantPage/Important.tsx";
 import Upcoming from "@/pages/UpcomingPage/Upcoming.tsx";
 import Complete from "@/pages/CompletedPage/Complete.tsx";
-import Task from "@/pages/Task/Task.tsx";
+import Home from "@/pages/Task/Home.tsx";
 import {authLoader, authRouteGuard, logoutLoader} from "@/loader/logoutLoader.ts";
 import ErrorPage from "@/pages/ErrorPage/404.tsx";
 
@@ -26,6 +26,11 @@ const router = createBrowserRouter([
                 loader: authLoader,
             },
             {
+                path: "myday",
+                element: <MyDay/>,
+                loader: authLoader,
+            },
+            {
                 path: "important",
                 element: <Important/>,
                 loader: authLoader,
@@ -40,11 +45,6 @@ const router = createBrowserRouter([
                 element: <Complete/>,
                 loader: authLoader,
             },
-            {
-                path: "task",
-                element: <Task/>,
-                loader: authLoader,
-            }
         ]
     },
     {
