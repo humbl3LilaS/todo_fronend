@@ -2,7 +2,7 @@ import {create} from "zustand";
 import {immer} from "zustand/middleware/immer";
 
 type State = {
-    sortBy: "dueDate" | "priority" | "alphabetically" | "creationDate"
+    sortBy: "dueDate" | "priority" | "alphabetically" | "creationDate" | "importance"
     order: "asc" | "desc"
 }
 
@@ -16,7 +16,11 @@ export const useSortOption = create<TSortOptionStore>()(
     immer((set) => ({
         sortBy: "dueDate",
         order: "asc",
-        setSortBy: (payload) => (set(state => state.sortBy = payload)),
-        setOrder: (payload) => (set(state => state.order = payload)),
+        setSortBy: (payload) => (set(state => {
+            state.sortBy = payload
+        })),
+        setOrder: (payload) => (set(state => {
+            state.order = payload
+        })),
     }))
 )
