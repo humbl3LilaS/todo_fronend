@@ -1,13 +1,25 @@
 import {useTableColumns} from "@/table/TodoTableColumns.tsx";
-import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
+import {flexRender, getCoreRowModel, getPaginationRowModel, useReactTable} from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {TTodo} from "@/types/apiResponseType.ts";
+import {useState} from "react";
+import {Button} from "@/components/ui/button.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
 }
 
+type PaginationState = {
+    pageIndex: number;
+    pageSize: number;
+}
+
 export default function TodoTable({data}: TodoTableProps) {
+
+    const [pagination, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 6,
+    });
 
     const columns = useTableColumns();
 
@@ -15,6 +27,9 @@ export default function TodoTable({data}: TodoTableProps) {
         data: data ?? [],
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        onPaginationChange: setPagination,
+        state: {pagination}
     })
     return (
         <div>
@@ -40,6 +55,22 @@ export default function TodoTable({data}: TodoTableProps) {
                     ))}
                 </TableBody>
             </Table>
+            <div className={"mt-4 flex justify-end items-center"}>
+                <Button
+                    className={"px-6 mr-4"}
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    {'<'}
+                </Button>
+                <Button
+                    className={"px-6"}
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    {'>'}
+                </Button>
+            </div>
         </div>
     )
 }
