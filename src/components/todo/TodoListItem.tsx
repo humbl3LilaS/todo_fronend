@@ -1,6 +1,7 @@
 import {TTodo} from "@/types/apiResponseType.ts";
 import TodoCheckBox from "@/table/TodoCheckBox.tsx";
 import DueDate from "@/table/DueDate.tsx";
+import ImportanceToggle from "@/components/button/ImportanceToggle.tsx";
 
 type TodoListItemProps = {
     context: TTodo
@@ -13,6 +14,7 @@ export default function TodoListItem({context}: TodoListItemProps) {
                 <span className={"text-lg"}>{context.content}</span>
                 {context.dueAt && <DueDate due={context.dueAt} className={"text-sm"} prefixText={"Overdue: "}/>}
             </p>
+            <ImportanceToggle id={context._id} importance={context.importance} className={"ml-auto"}/>
         </li>
     )
 }

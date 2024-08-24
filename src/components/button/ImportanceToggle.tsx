@@ -4,10 +4,11 @@ import {useUpdateTodo} from "@/query/mutation.ts";
 
 type ImportanceToggleProps = {
     id: string;
-    importance: boolean | undefined
+    importance: boolean | undefined;
+    className?: string;
 }
 
-export default function ImportanceToggle({id, importance}: ImportanceToggleProps) {
+export default function ImportanceToggle({id, importance, className}: ImportanceToggleProps) {
 
     const [important, setImportant] = useState(importance);
     const {mutateAsync} = useUpdateTodo();
@@ -17,7 +18,7 @@ export default function ImportanceToggle({id, importance}: ImportanceToggleProps
         setImportant(important => !important);
     }
     return (
-        <div className={"w-fit ml-4"}
+        <div className={cn("w-fit ml-4", className)}
              onClick={handler}
         >
             {important ?
