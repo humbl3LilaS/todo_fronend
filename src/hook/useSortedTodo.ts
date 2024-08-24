@@ -17,8 +17,13 @@ export const useSortedTodo = (data: TTodo[] | undefined) => {
             return data?.slice().sort((a, b) => {
                 return a.content.localeCompare(b.content)
             });
-        // TODO: Implement sorting by Importance
-        // TODO: Implement sorting by Priority
+        case "importance":
+            return data?.slice().sort((a, b) => {
+                if ((!a.importance && !b.importance) || (a.importance && b.importance)) return 0;
+                if (!a.importance) return 1;
+                if (!b.importance) return -1;
+                return 0;
+            })
         case "creationDate":
             return data?.slice().sort((a, b) => {
                 if (differenceInDays(a.createdAt, b.createdAt) === 0) return 0;

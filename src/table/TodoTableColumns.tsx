@@ -25,7 +25,7 @@ const columns = [
         }),
     columnHelper.accessor("importance", {
         header: "Importance",
-        cell: ({getValue, row}) => <ImportanceToggle id={row.original._id} importance={getValue()}/>
+        cell: ({getValue, row}) => <ImportanceToggle id={row.original._id} importance={getValue()} key={row.original._id}/>
     }),
 
 ]
