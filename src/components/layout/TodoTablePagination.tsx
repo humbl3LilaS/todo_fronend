@@ -89,7 +89,7 @@ const getPaginationItems = (pageCounts: number, currentPage: number, handler: (p
         return (
             arr.map((_, idx) => <PaginationItem>
                 <Button variant="link"
-                        onClick={() => handler(idx + 1)}
+                        onClick={() => handler(idx)}
                         className={cn((currentPage === idx) && "bg-stone-500 text-white")}
 
                 >
