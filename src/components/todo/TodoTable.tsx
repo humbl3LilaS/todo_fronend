@@ -3,13 +3,13 @@ import {flexRender, getCoreRowModel, getPaginationRowModel, useReactTable} from 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {TTodo} from "@/types/apiResponseType.ts";
 import {useState} from "react";
-import {Button} from "@/components/ui/button.tsx";
+import TodoTablePagination from "@/components/layout/TodoTablePagination.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
 }
 
-type PaginationState = {
+export type PaginationState = {
     pageIndex: number;
     pageSize: number;
 }
@@ -18,7 +18,7 @@ export default function TodoTable({data}: TodoTableProps) {
 
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 6,
+        pageSize: 2,
     });
 
     const columns = useTableColumns();
@@ -29,7 +29,7 @@ export default function TodoTable({data}: TodoTableProps) {
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onPaginationChange: setPagination,
-        state: {pagination}
+        state: {pagination},
     })
     return (
         <div>
@@ -55,22 +55,8 @@ export default function TodoTable({data}: TodoTableProps) {
                     ))}
                 </TableBody>
             </Table>
-            <div className={"mt-4 flex justify-end items-center"}>
-                <Button
-                    className={"px-6 mr-4"}
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<'}
-                </Button>
-                <Button
-                    className={"px-6"}
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>'}
-                </Button>
-            </div>
+            <TodoTablePagination pageCounts={table.getPageCount()} pagination={pagination}
+                                 setPagination={setPagination}/>
         </div>
     )
 }
