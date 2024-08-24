@@ -7,6 +7,7 @@ export type TTodo = {
     dueAt?: number;
     finishedAt?: number;
     priority?: Priority;
+    importance?: boolean;
 }
 
 export type TTableTodo = Exclude<TTodo, "author" | "createdAt" | "finishedAt" | "priority">

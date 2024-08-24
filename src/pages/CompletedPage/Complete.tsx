@@ -11,7 +11,7 @@ export default function Complete() {
     const todos = useProcessedTodo({filterOption: "finished"})
     return (
         <Section>
-            <SectionNav navHeader={"Complete"} iconPath={check}/>
+            <SectionNav navHeader={"Completed"} iconPath={check}/>
             {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/> }
         </Section>
     );
