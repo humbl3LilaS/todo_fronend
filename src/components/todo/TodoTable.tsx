@@ -7,7 +7,7 @@ import TodoTablePagination from "@/components/layout/TodoTablePagination.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
-    completed ?: boolean
+    completed?: boolean
 }
 
 export type PaginationState = {
@@ -21,6 +21,7 @@ export default function TodoTable({data, completed}: TodoTableProps) {
         pageIndex: 0,
         pageSize: 5,
     });
+
 
     const columns = useTableColumns(completed);
 
@@ -54,10 +55,19 @@ export default function TodoTable({data, completed}: TodoTableProps) {
                             ))}
                         </TableRow>
                     ))}
+
                 </TableBody>
             </Table>
-            <TodoTablePagination pageCounts={table.getPageCount()} pagination={pagination}
-                                 setPagination={setPagination}/>
+            {
+                !data || data!.length === 0 &&
+                <h1 className={"py-5 text-center font-semibold"}>You don't have things todo huu yay!!</h1>
+            }
+
+            {
+                data && data!.length > 0 && <TodoTablePagination pageCounts={table.getPageCount()} pagination={pagination}
+                                             setPagination={setPagination}/>
+            }
+
         </div>
     )
 }

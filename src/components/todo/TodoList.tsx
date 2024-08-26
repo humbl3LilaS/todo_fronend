@@ -11,6 +11,7 @@ export default function TodoList({data, completed}: TodoListProps) {
             <div className={"max-h-listContainer p-4  overflow-scroll"}>
                 <ul className={"flex flex-col gap-y-5"}>
                     {data && data.map(todo => <TodoListItem context={todo} key={todo._id} completed={completed}/>)}
+                    {data && data.length === 0 && <h1 className={"py-5 text-center font-semibold"}>You don't have things todo huu yay!!</h1>}
                 </ul>
             </div>
     )

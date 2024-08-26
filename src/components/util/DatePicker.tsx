@@ -13,7 +13,6 @@ export default function DatePicker() {
 
     const {date, setDate} = useDateInput();
 
-    console.log("datepicker", date)
     return (
         <Popover>
             <PopoverTrigger asChild>
