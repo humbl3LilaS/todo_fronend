@@ -14,7 +14,7 @@ export const useFilteredTodo = ({option}: { option: FilterOption }): TTodo[] | u
             return todos?.filter(todo => !todo.isFinished);
         case "upcoming" : {
             const today = new Date().valueOf();
-            return todos?.filter(todo => todo.dueAt)
+            return todos?.filter(todo => todo.dueAt && !todo.isFinished)
                 .filter(todo => {
                     return differenceInDays(todo.dueAt ?? 0, today) > 0
                 });
