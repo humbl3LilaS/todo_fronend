@@ -8,6 +8,7 @@ import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
 import TodoTable from "@/components/todo/TodoTable.tsx";
 import TodoList from "@/components/todo/TodoList.tsx";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
+import {Separator} from "@/components/ui/separator.tsx";
 
 export default function Home() {
     const {style} = useListStyleStore();
@@ -20,6 +21,7 @@ export default function Home() {
             <DateInputProvider>
                 <TodoInput/>
             </DateInputProvider>
+            <Separator className={"mt-6 mb-6"}/>
             {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
         </Section>
     )
