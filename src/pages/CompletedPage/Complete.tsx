@@ -12,7 +12,7 @@ export default function Complete() {
     return (
         <Section>
             <SectionNav navHeader={"Completed"} iconPath={check}/>
-            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/> }
+            {style === "grid" ? <TodoTable data={todos} completed={true}/> : <TodoList data={todos} completed={true}/> }
         </Section>
     );
 }

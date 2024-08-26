@@ -5,9 +5,10 @@ import {cn} from "@/lib/utils.ts";
 type TTodoCheckBoxProps = {
     id: string;
     className?: string;
+    checked?: boolean;
 }
 
-export default function TodoCheckBox({id, className}: TTodoCheckBoxProps) {
+export default function TodoCheckBox({id, className, checked}: TTodoCheckBoxProps) {
     const {mutateAsync} = useUpdateTodo();
     const handler = async () => {
         await mutateAsync({id, payload: {isFinished: true}});
@@ -18,6 +19,7 @@ export default function TodoCheckBox({id, className}: TTodoCheckBoxProps) {
             aria-label={"Select row"}
             key={id}
             className={cn(className)}
+            checked={checked}
         />
     )
 }

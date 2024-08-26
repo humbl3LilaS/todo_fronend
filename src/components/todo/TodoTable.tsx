@@ -7,6 +7,7 @@ import TodoTablePagination from "@/components/layout/TodoTablePagination.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
+    completed ?: boolean
 }
 
 export type PaginationState = {
@@ -14,14 +15,14 @@ export type PaginationState = {
     pageSize: number;
 }
 
-export default function TodoTable({data}: TodoTableProps) {
+export default function TodoTable({data, completed}: TodoTableProps) {
 
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
         pageSize: 5,
     });
 
-    const columns = useTableColumns();
+    const columns = useTableColumns(completed);
 
     const table = useReactTable({
         data: data ?? [],
