@@ -7,11 +7,22 @@ import {Calendar} from "@/components/ui/calendar.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {addDays} from "date-fns";
 import {useDateInput} from "@/provider/dateInputProvider.tsx";
+import {useEffect} from "react";
 
 
-export default function DatePicker() {
+type DatePickerProps = {
+    defaultValue?: number | undefined;
+}
+
+export default function DatePicker({defaultValue}: DatePickerProps) {
 
     const {date, setDate} = useDateInput();
+
+    useEffect(() => {
+        if (defaultValue) {
+            setDate(new Date(defaultValue));
+        }
+    }, [defaultValue]);
 
     return (
         <Popover>
