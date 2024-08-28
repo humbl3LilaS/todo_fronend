@@ -12,6 +12,8 @@ import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {cn} from "@/lib/utils.ts";
 import DatePicker from "@/components/util/DatePicker.tsx";
+import PrioritySelector from "@/components/util/PrioritySelector.tsx";
+import StatusSelector from "@/components/util/StatusSelector.tsx";
 
 
 type TodoDetailDialogProps = {
@@ -40,16 +42,21 @@ export default function TodoDetailDialog({data}: TodoDetailDialogProps) {
                         <Label htmlFor="content" className={"text-md capitalize"}>content</Label>
                         <Input id={"content"} defaultValue={data.content} className={"mt-2"}/>
                     </div>
-                    <div>
-                        <Label htmlFor={"dueDate"} className={"mr-4 text-md capitalize"}>Due date: </Label>
+                    <div className={"mb-4 flex justify-start items-center"}>
+                        <Label htmlFor={"dueDate"} className={"w-[120px] mr-4 text-md capitalize"}>Due date: </Label>
                         <DatePicker defaultValue={data.dueAt}/>
                     </div>
-                    <div>
-                        <Label htmlFor={"priority"} className={"mr-4 text-md capitalize"}>Priority: </Label>
+                    <div className={"mb-4 flex justify-start items-center"}>
+                        <Label htmlFor={"priority"} className={"w-[120px] mr-4 text-md capitalize"}>Priority: </Label>
+                        <PrioritySelector defaultValue={data.priority}/>
+                    </div>
+                    <div className={"mb-4 flex justify-start items-center"}>
+                        <Label htmlFor={"status"} className={"w-[120px] mr-4 text-md capitalize"}>Status: </Label>
+                        <StatusSelector defaultValue={data.isFinished}/>
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type={"submit"} className={"mt-4 font-bold"}>
+                    <Button type={"submit"} className={"font-bold"}>
                         Submit
                     </Button>
                 </DialogFooter>
