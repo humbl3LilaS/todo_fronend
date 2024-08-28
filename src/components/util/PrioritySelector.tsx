@@ -1,14 +1,21 @@
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger} from "@/components/ui/select.tsx";
 import {SelectValue} from "@radix-ui/react-select";
+import {Priority} from "@/types/apiResponseType.ts";
 
 type PrioritySelectorProps = {
-    defaultValue?: number | undefined;
+    defaultValue?: Priority | undefined;
+    handler: (payload: Priority | undefined) => void;
 }
 
-export default function PrioritySelector({defaultValue}: PrioritySelectorProps) {
+export default function PrioritySelector({defaultValue, handler}: PrioritySelectorProps) {
 
     return (
-        <Select defaultValue={defaultValue?.toString()}>
+        <Select defaultValue={defaultValue?.toString()}
+                onValueChange={(value: string) => {
+                    handler(parseInt(value) as Priority | undefined);
+                }}
+        >
+
             <SelectTrigger className={"w-[180px]"}>
                 <SelectValue placeholder={"Select Priority"}/>
             </SelectTrigger>

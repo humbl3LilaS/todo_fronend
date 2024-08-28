@@ -13,7 +13,7 @@ export type TTodo = {
 export type TTableTodo = Exclude<TTodo, "author" | "createdAt" | "finishedAt" | "priority">
 
 
-type Priority = 1 | 2 | 3 | 4 | 5;
+export type Priority = 1 | 2 | 3 | 4 | 5;
 
 type TAuthor = {
     "_id": string;

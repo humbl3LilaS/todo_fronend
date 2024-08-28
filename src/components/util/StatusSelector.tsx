@@ -1,12 +1,15 @@
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 
 type StatusSelectorProps = {
-    defaultValue: boolean
+    defaultValue: boolean,
+    handler: (payload: boolean) => void,
 }
 
-export default function StatusSelector({defaultValue}: StatusSelectorProps) {
+export default function StatusSelector({defaultValue, handler}: StatusSelectorProps) {
     return (
-        <Select defaultValue={defaultValue ? "1" : "0"}>
+        <Select defaultValue={defaultValue ? "1" : "0"} onValueChange={(value: string) => {
+            value === "1" ? handler(true) : handler(false)
+        }}>
             <SelectTrigger className={"w-[180px]"}>
                 <SelectValue placeholder={"Status"}/>
             </SelectTrigger>
