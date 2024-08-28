@@ -19,7 +19,7 @@ export default function TodoTable({data, completed}: TodoTableProps) {
 
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 5,
+        pageSize: 4,
     });
 
 
