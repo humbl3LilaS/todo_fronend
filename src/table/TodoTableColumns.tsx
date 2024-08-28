@@ -3,6 +3,8 @@ import {TTableTodo} from "@/types/apiResponseType.ts";
 import DueDate from "@/table/DueDate.tsx";
 import TodoCheckBox from "@/table/TodoCheckBox.tsx";
 import ImportanceToggle from "@/components/button/ImportanceToggle.tsx";
+import TodoDetailDialog from "@/components/todo/TodoDetailDialog.tsx";
+import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 
 
 const columnHelper = createColumnHelper<TTableTodo>();
@@ -33,7 +35,7 @@ const columnHelper = createColumnHelper<TTableTodo>();
 
 // export const useTableColumns = () => columns;
 
-export const useTableColumns = (completed?:boolean) => {
+export const useTableColumns = (completed?: boolean) => {
     const columns = [
         columnHelper.accessor("_id",
             {
@@ -43,7 +45,7 @@ export const useTableColumns = (completed?:boolean) => {
         columnHelper.accessor("content",
             {
                 header: 'Todo',
-                cell: props => completed ? <div className={"text-red-500 line-through"}>{props.getValue()}</div> : <div>{props.getValue()}</div>
+                cell: ({row}) => <DateInputProvider><TodoDetailDialog data={row.original}/></DateInputProvider>
             }),
         columnHelper.accessor("dueAt",
             {
