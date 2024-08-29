@@ -15,7 +15,7 @@ export default function Important() {
             <SectionNav navHeader={"Important"} iconPath={star}>
                 <SortSelectBox/>
             </SectionNav>
-            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
+            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos} isFullPage={true}/>}
         </Section>
     );
 }

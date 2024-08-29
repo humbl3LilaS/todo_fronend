@@ -8,7 +8,6 @@ import TodoList from "@/components/todo/TodoList.tsx";
 import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
 
 
-
 export default function MyDay() {
     const {style} = useListStyleStore();
     const todos = useProcessedTodo({filterOption: "today"})
@@ -18,7 +17,7 @@ export default function MyDay() {
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
-            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
+            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos} isFullPage={true}/>}
         </Section>
     );
 }

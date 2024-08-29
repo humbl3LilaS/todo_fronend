@@ -12,7 +12,7 @@ export default function Upcoming() {
     return (
         <Section>
             <SectionNav navHeader={"Upcoming"} iconPath={calendar}/>
-            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
+            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos} isFullPage={true}/>}
         </Section>
     );
 }

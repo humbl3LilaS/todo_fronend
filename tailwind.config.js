@@ -33,7 +33,8 @@ module.exports = {
             },
         },
         maxHeight: {
-            listContainer: "400px"
+            listContainer: "400px",
+            listContainerLarge: "750px"
         }
     },
     plugins: [require("tailwindcss-animate")],
