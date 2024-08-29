@@ -4,6 +4,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import {TTodo} from "@/types/apiResponseType.ts";
 import {useState} from "react";
 import TodoTablePagination from "@/components/layout/TodoTablePagination.tsx";
+import TodoListSkeleton from "@/components/todo/TodoListSkeleton.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
@@ -25,6 +26,7 @@ export default function TodoTable({data, completed}: TodoTableProps) {
 
     const columns = useTableColumns(completed);
 
+
     const table = useReactTable({
         data: data ?? [],
         columns,
@@ -35,39 +37,43 @@ export default function TodoTable({data, completed}: TodoTableProps) {
     })
     return (
         <div>
-            <Table>
-                <TableHeader>
-                    {table.getHeaderGroups().map((headerGroup) => (<TableRow key={headerGroup.id}>
-                        {headerGroup.headers.map((column) => (
-                            <TableHead key={column.id}>
-                                {column.isPlaceholder ? null : flexRender(column.column.columnDef.header, column.getContext())}
-                            </TableHead>
-                        ))}
-                    </TableRow>))}
-                </TableHeader>
-                <TableBody>
-                    {table.getRowModel().rows.map((rowModel) => (
-                        <TableRow key={rowModel.id}>
-                            {rowModel.getVisibleCells().map((visibleCells) => (
-                                <TableCell key={visibleCells.id}>
-                                    {flexRender(visibleCells.column.columnDef.cell, visibleCells.getContext())}
-                                </TableCell>
+            {
+                data ? <Table>
+                        <TableHeader>
+                            {table.getHeaderGroups().map((headerGroup) => (<TableRow key={headerGroup.id}>
+                                {headerGroup.headers.map((column) => (
+                                    <TableHead key={column.id}>
+                                        {column.isPlaceholder ? null : flexRender(column.column.columnDef.header, column.getContext())}
+                                    </TableHead>
+                                ))}
+                            </TableRow>))}
+                        </TableHeader>
+                        <TableBody>
+                            {table.getRowModel().rows.map((rowModel) => (
+                                <TableRow key={rowModel.id}>
+                                    {rowModel.getVisibleCells().map((visibleCells) => (
+                                        <TableCell key={visibleCells.id}>
+                                            {flexRender(visibleCells.column.columnDef.cell, visibleCells.getContext())}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
                             ))}
-                        </TableRow>
-                    ))}
 
-                </TableBody>
-            </Table>
+                        </TableBody>
+                    </Table>
+                    :
+                    <TodoListSkeleton/>
+            }
             {
                 !data || data!.length === 0 &&
                 <h1 className={"py-5 text-center font-semibold"}>You don't have things todo huu yay!!</h1>
             }
 
             {
-                data && data!.length > 0 && <TodoTablePagination pageCounts={table.getPageCount()} pagination={pagination}
-                                             setPagination={setPagination}/>
+                data && data!.length > 0 &&
+                <TodoTablePagination pageCounts={table.getPageCount()} pagination={pagination}
+                                     setPagination={setPagination}/>
             }
-
         </div>
     )
 }
