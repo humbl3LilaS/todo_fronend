@@ -4,7 +4,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import {TTodo} from "@/types/apiResponseType.ts";
 import {useState} from "react";
 import TodoTablePagination from "@/components/layout/TodoTablePagination.tsx";
-import TodoListSkeleton from "@/components/todo/TodoListSkeleton.tsx";
+import TodoTableSkeleton from "@/components/todo/TodoTableSkeleton.tsx";
 
 type TodoTableProps = {
     data: TTodo[] | undefined;
@@ -62,7 +62,7 @@ export default function TodoTable({data, completed}: TodoTableProps) {
                         </TableBody>
                     </Table>
                     :
-                    <TodoListSkeleton/>
+                    <TodoTableSkeleton/>
             }
             {
                 !data || data!.length === 0 &&

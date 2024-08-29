@@ -13,7 +13,7 @@ type TListStyleStore = State & Action;
 
 export const useListStyleStore = create<TListStyleStore>()(
     immer((set) => ({
-        style: "grid",
+        style: "list",
         setStyle: (style) => set((state) => {
             console.log("action dispatched: " , style)
             state.style = style
