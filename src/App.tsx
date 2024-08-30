@@ -60,7 +60,8 @@ const router = createBrowserRouter([
 
 
 function App() {
-
+    console.log("app start")
+    console.log(import.meta.env.API_ENDPOINT)
     return (
         <QueryClientProvider client={queryClient}>
             <RouterProvider router={router}/>

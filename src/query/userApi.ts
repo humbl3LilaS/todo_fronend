@@ -11,7 +11,7 @@ export const getUser = async () => {
 
     // @ts-ignore
     const user = await axios.request<TUser, AxiosResponse<TUser>>({
-        baseURL: "http://localhost:3000/api/v1/user/me",
+        baseURL: `${import.meta.env.VITE_API_ENDPOINT}/user/me`,
         method: "GET",
         headers: authHeader
     }).then(res => res.data);

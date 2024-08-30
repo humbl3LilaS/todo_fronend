@@ -11,7 +11,7 @@ export const getAllTodo = async () => {
 
     // @ts-ignore
     const todos = await axios.request<TTodo[], AxiosResponse<TTodo[]>>({
-        baseURL: "http://localhost:3000/api/v1/todos",
+        baseURL: `${import.meta.env.VITE_API_ENDPOINT}/todos`,
         method: "GET",
         headers: authHeader
     }).then(res => res.data);
@@ -25,7 +25,7 @@ export const addTodo = async (payload: Partial<TTodo>) => {
         "Authentication": `Bearer ${JWT_TOKEN?.accessToken}`
     };
     await axios.request<Partial<TTodo>[], AxiosResponse<Partial<TTodo>[]>>({
-        baseURL: "http://localhost:3000/api/v1/todos",
+        baseURL: `${import.meta.env.VITE_API_ENDPOINT}/todos`,
         method: "POST",
         headers: authHeader,
         data: payload
@@ -44,7 +44,7 @@ export const updateTodo = async ({id, payload}: TUpdateTodo) => {
     };
     await axios.request<Partial<TTodo>, AxiosResponse<Partial<TTodo>>>(
         {
-            baseURL: `http://localhost:3000/api/v1/todos/${id}`,
+            baseURL: `${import.meta.env.VITE_API_ENDPOINT}/todos/${id}`,
             method: "PUT",
             headers: authHeader,
             data: payload
