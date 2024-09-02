@@ -5,14 +5,14 @@ import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import Todos from "@/components/todo/Todos.tsx";
 
 
-export default function MyDay() {
 
+export default function MyDay() {
     return (
         <Section>
             <SectionNav navHeader={"My Day"} iconPath={sun}>
                 <SortSelectBox/>
             </SectionNav>
-            <Todos/>
+            <Todos filterOption={"today"}/>
         </Section>
     );
 }

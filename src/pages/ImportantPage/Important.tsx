@@ -11,7 +11,7 @@ export default function Important() {
             <SectionNav navHeader={"Important"} iconPath={star}>
                 <SortSelectBox/>
             </SectionNav>
-            <Todos/>
+            <Todos filterOption={"importance"}/>
         </Section>
     );
 }

@@ -6,6 +6,7 @@ import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
 import Todos from "@/components/todo/Todos.tsx";
+import DatePicker from "@/components/util/DatePicker.tsx";
 
 export default function Home() {
 
@@ -15,10 +16,12 @@ export default function Home() {
                 <SortSelectBox/>
             </SectionNav>
             <DateInputProvider>
-                <TodoInput/>
+                <TodoInput>
+                    <DatePicker/>
+                </TodoInput>
             </DateInputProvider>
             <Separator className={"mt-6 mb-6"}/>
-            <Todos/>
+            <Todos filterOption={"all"}/>
         </Section>
     )
 }

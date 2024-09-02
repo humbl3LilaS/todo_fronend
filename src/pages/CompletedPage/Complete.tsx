@@ -8,7 +8,7 @@ export default function Complete() {
     return (
         <Section>
             <SectionNav navHeader={"Completed"} iconPath={check}/>
-            <Todos/>
+            <Todos filterOption={"finished"}/>
         </Section>
     );
 }
