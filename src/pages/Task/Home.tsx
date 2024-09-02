@@ -3,16 +3,12 @@ import home from "/icon/home.svg";
 import SectionNav from "@/components/nav/SectionNav.tsx";
 import TodoInput from "@/components/form/TodoInput.tsx";
 import {DateInputProvider} from "@/provider/dateInputProvider.tsx";
-import {useListStyleStore} from "@/store/listStyleStore.ts";
-import {useProcessedTodo} from "@/hook/useProcessedTodo.ts";
-import TodoTable from "@/components/todo/TodoTable.tsx";
-import TodoList from "@/components/todo/TodoList.tsx";
 import SortSelectBox from "@/components/util/SortSelectBox.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
+import Todos from "@/components/todo/Todos.tsx";
 
 export default function Home() {
-    const {style} = useListStyleStore();
-    const todos = useProcessedTodo({filterOption: "all"})
+
     return (
         <Section>
             <SectionNav navHeader={"Home"} iconPath={home}>
@@ -22,7 +18,7 @@ export default function Home() {
                 <TodoInput/>
             </DateInputProvider>
             <Separator className={"mt-6 mb-6"}/>
-            {style === "grid" ? <TodoTable data={todos}/> : <TodoList data={todos}/>}
+            <Todos/>
         </Section>
     )
 }

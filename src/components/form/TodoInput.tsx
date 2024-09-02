@@ -4,12 +4,13 @@ import {Separator} from "@/components/ui/separator.tsx";
 import DatePicker from "@/components/util/DatePicker.tsx";
 import {useAddTodo} from "@/query/mutation.ts";
 import {useDateInput} from "@/provider/dateInputProvider.tsx";
+import {memo} from "react";
 
 type TInput = {
     content: string;
 }
 
-export default function TodoInput() {
+function TodoInput() {
 
     const {mutateAsync} = useAddTodo();
 
@@ -49,3 +50,5 @@ export default function TodoInput() {
         </div>
     )
 }
+
+export default memo(TodoInput);
