@@ -17,7 +17,7 @@ import StatusSelector from "@/components/util/StatusSelector.tsx";
 import {useRef, useState} from "react";
 import {produce} from "immer";
 import {useDateInput} from "@/provider/dateInputProvider.tsx";
-import {useUpdateTodo} from "@/query/mutation.ts";
+import {useDeleteTodo, useUpdateTodo} from "@/query/mutation.ts";
 
 
 type TodoDetailDialogProps = {
@@ -34,7 +34,8 @@ export default function TodoDetailDialog({data}: TodoDetailDialogProps) {
 
     const {date} = useDateInput();
 
-    const {mutateAsync} = useUpdateTodo();
+    const {mutateAsync: updateTodo} = useUpdateTodo();
+    const {mutateAsync: deleteTodo} = useDeleteTodo();
 
     const [editTodo, setEditTodo] = useState<TEditTodo>({
         priority: data.priority,
@@ -50,9 +51,13 @@ export default function TodoDetailDialog({data}: TodoDetailDialogProps) {
         }))
     }
 
+    const deleteHandler = async () => {
+        await deleteTodo({id: data._id})
+    }
+
     const submitHandler = async () => {
         if (input?.current?.value) {
-            await mutateAsync({
+            await updateTodo({
                 id: data._id,
                 payload: {
                     content: input.current?.value,
@@ -99,6 +104,10 @@ export default function TodoDetailDialog({data}: TodoDetailDialogProps) {
                     </div>
                 </div>
                 <DialogFooter>
+                    <Button type={"submit"} onClick={deleteHandler} className={"bg-red-500 text-white"}>
+                        Delete
+                    </Button>
+
                     <Button type={"submit"} className={"font-bold"} onClick={submitHandler}>
                         Submit
                     </Button>
