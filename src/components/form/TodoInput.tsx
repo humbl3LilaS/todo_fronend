@@ -2,7 +2,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
 import {useAddTodo} from "@/query/mutation.ts";
-import {useDateInput} from "@/provider/dateInputProvider.tsx";
+import {useDateAction, useDateValue} from "@/provider/dateInputProvider.tsx";
 import {memo} from "react";
 
 type TInput = {
@@ -24,8 +24,9 @@ function TodoInput({children}: TodoInputProps) {
         formState: {isValid}
     } = useForm<TInput>()
 
-    const {date, setDate} = useDateInput();
-
+    // const {date, setDate} = useDateInput();
+    const date = useDateValue();
+    const setDate = useDateAction();
 
     const onSubmit: SubmitHandler<TInput> = async (data) => {
         await mutateAsync({

@@ -6,8 +6,8 @@ import {PopoverContent} from "@radix-ui/react-popover";
 import {Calendar} from "@/components/ui/calendar.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {addDays} from "date-fns";
-import {useDateInput} from "@/provider/dateInputProvider.tsx";
 import {useEffect} from "react";
+import {useDateAction, useDateValue} from "@/provider/dateInputProvider.tsx";
 
 
 type DatePickerProps = {
@@ -16,8 +16,8 @@ type DatePickerProps = {
 
 export default function DatePicker({defaultValue}: DatePickerProps) {
 
-    const {date, setDate} = useDateInput();
-
+    const date = useDateValue();
+    const setDate = useDateAction();
     useEffect(() => {
         if (defaultValue) {
             setDate(new Date(defaultValue));

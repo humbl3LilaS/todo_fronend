@@ -16,7 +16,7 @@ import PrioritySelector from "@/components/util/PrioritySelector.tsx";
 import StatusSelector from "@/components/util/StatusSelector.tsx";
 import {useRef, useState} from "react";
 import {produce} from "immer";
-import {useDateInput} from "@/provider/dateInputProvider.tsx";
+import {useDateValue} from "@/provider/dateInputProvider.tsx";
 import {useDeleteTodo, useUpdateTodo} from "@/query/mutation.ts";
 
 
@@ -32,8 +32,8 @@ type TEditTodo = {
 
 export default function TodoDetailDialog({data}: TodoDetailDialogProps) {
 
-    const {date} = useDateInput();
-
+    // const {date} = useDateInput();
+    const date = useDateValue();
     const {mutateAsync: updateTodo} = useUpdateTodo();
     const {mutateAsync: deleteTodo} = useDeleteTodo();
 
